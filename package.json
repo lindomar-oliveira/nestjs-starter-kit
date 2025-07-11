@@ -24,6 +24,7 @@
     "@nestjs/config": "4.x",
     "@nestjs/core": "11.x",
     "@nestjs/platform-express": "11.x",
+    "@nestjs/typeorm": "11.x",
     "reflect-metadata": "0.2.x",
     "rxjs": "7.x",
     "zod": "4.x"
@@ -46,6 +47,7 @@
     "jest": "29.x",
     "prettier": "3.x",
     "source-map-support": "0.5.x",
+    "sqlite3": "5.x",
     "supertest": "7.x",
     "ts-jest": "29.x",
     "ts-loader": "9.x",
