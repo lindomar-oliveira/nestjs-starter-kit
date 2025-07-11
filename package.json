@@ -29,6 +29,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "3.x",
     "@eslint/js": "9.x",
+    "@ianvs/prettier-plugin-sort-imports": "4.x",
     "@nestjs/cli": "11.x",
     "@nestjs/schematics": "11.x",
     "@nestjs/testing": "11.x",
@@ -61,6 +62,9 @@
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "moduleNameMapper": {
+      "^~/(.*)$": "<rootDir>/$1"
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
