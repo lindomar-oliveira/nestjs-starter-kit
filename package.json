@@ -21,10 +21,12 @@
   },
   "dependencies": {
     "@nestjs/common": "11.x",
+    "@nestjs/config": "4.x",
     "@nestjs/core": "11.x",
     "@nestjs/platform-express": "11.x",
     "reflect-metadata": "0.2.x",
-    "rxjs": "7.x"
+    "rxjs": "7.x",
+    "zod": "4.x"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.x",
