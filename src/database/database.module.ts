@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 import { ConfigService } from '~/config/config.service';
+import { RepositoriesModule } from '~/database/repositories/repositories.module';
 
 @Module({
   imports: [
@@ -14,9 +15,13 @@ import { ConfigService } from '~/config/config.service';
           port: configService.get('DB_PORT'),
           username: configService.get('DB_USERNAME'),
           password: configService.get('DB_PASSWORD'),
-          database: configService.get('DB_DATABASE')
+          database: configService.get('DB_DATABASE'),
+          autoLoadEntities: true,
+          synchronize: false,
+          timezone: 'Z'
         }) as TypeOrmModuleOptions
-    })
+    }),
+    RepositoriesModule
   ]
 })
 export class DatabaseModule {}

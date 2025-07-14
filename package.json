@@ -25,6 +25,7 @@
       "@nestjs/core": "11.x",
       "@nestjs/platform-express": "11.x",
       "@nestjs/typeorm": "11.x",
+      "bcryptjs": "3.x",
       "reflect-metadata": "0.2.x",
       "rxjs": "7.x",
       "typeorm": "0.3.x",
