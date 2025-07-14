@@ -28,6 +28,7 @@
       "reflect-metadata": "0.2.x",
       "rxjs": "7.x",
       "typeorm": "0.3.x",
+      "typeorm-extension": "3.x",
       "zod": "4.x"
    },
    "devDependencies": {

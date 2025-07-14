@@ -5,6 +5,8 @@ const { execSync } = require('child_process');
 
 const TYPEORM = 'npx typeorm-ts-node-commonjs -d src/data-source.ts';
 
+const SEEDER = 'node -r tsconfig-paths/register -r ts-node/register node_modules/typeorm-extension/bin/cli.cjs';
+
 const runCommand = (cmd) => {
   try {
     execSync(cmd, { stdio: 'inherit' });
@@ -19,16 +21,7 @@ yargs()
   .usage('$0 <cmd> [args]')
 
   .command(
-    'migrate',
-    'Run all pending migrations',
-    () => {},
-    () => {
-      runCommand(`${TYPEORM} migration:run`);
-    }
-  )
-
-  .command(
-    'migration <name>',
+    'migration:create <name>',
     'Create a new migration file',
     (yargs) => {
       yargs
@@ -47,15 +40,24 @@ yargs()
     (args) => {
       const { name, empty } = args;
       const command = empty
-        ? `${TYPEORM} migration:create src/database/migrations/${name}`
+        ? `npx typeorm-ts-node-commonjs migration:create src/database/migrations/${name}`
         : `${TYPEORM} migration:generate src/database/migrations/${name}`;
       runCommand(command);
     }
   )
 
   .command(
-    'migration:status',
-    'List executed and pending migrations',
+    'migration:run',
+    'Run all pending migrations',
+    () => {},
+    () => {
+      runCommand(`${TYPEORM} migration:run`);
+    }
+  )
+
+  .command(
+    'migration:show',
+    'Show all migrations and their run status',
     () => {},
     () => {
       runCommand(`${TYPEORM} migration:show`);
@@ -64,7 +66,7 @@ yargs()
 
   .command(
     'migration:revert',
-    'Revert the last migration',
+    'Revert the last executed migration',
     () => {},
     () => {
       runCommand(`${TYPEORM} migration:revert`);
@@ -72,8 +74,33 @@ yargs()
   )
 
   .command(
-    'wipe',
-    'Drop the database schema (⚠️ irreversible — use with caution)',
+    'seed:create <name>',
+    'Create a new seed file',
+    (yargs) => {
+      yargs.positional('name', {
+        type: 'string',
+        describe: 'Seed name',
+        demandOption: true
+      })
+    },
+    (args) => {
+      const { name } = args;
+      runCommand(`${SEEDER} seed:create -n src/database/seeds/${name}`)
+    }
+  )
+
+  .command(
+    'seed:run',
+    'Run database seeds',
+    () => {},
+    () => {
+      runCommand(`${SEEDER} seed:run`)
+    }
+  )
+
+  .command(
+    'schema:drop',
+    'Drop the database schema (⚠️  irreversible — use with caution)',
     () => {},
     () => {
       runCommand(`${TYPEORM} schema:drop`);
